@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import AIChatBot from './components/AIChatBot'
+import LoadingScreen from './components/LoadingScreen'
 import {
   ArrowDownRight, ArrowRight, BrainCircuit, CalendarDays, CheckCircle2,
   ChevronLeft, ChevronRight, CircleUserRound, Code2, Cpu, Download,
@@ -10,7 +11,7 @@ import {
 } from 'lucide-react'
 
 const certificates = [
-  { title: 'Data Analytics Essentials', issuer: 'Cisco Networking Academy', date: '20 Jun 2026', image: '/certificates/cisco-data-analytics-essentials.png' },
+  { title: 'Data Analytics Essentials', issuer: 'Cisco Networking Academy', date: '20 Jun 2026', image: '/certificates/cisco-data-analytics-essentials.jpg' },
   { title: 'Introduction to Modern AI', issuer: 'Cisco Networking Academy', date: '29 Aug 2026', image: '/certificates/cisco-introduction-modern-ai.png' },
   { title: 'Getting Started with Cisco Packet Tracer', issuer: 'Cisco Networking Academy', date: '12 Aug 2026', image: '/certificates/cisco-packet-tracer.png' },
   { title: 'Find Insights with AI', issuer: 'Cisco Networking Academy', date: '29 Aug 2026', image: '/certificates/cisco-find-insights-ai.png' },
@@ -125,6 +126,7 @@ function Paper({ children, className = '' }) {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dark, setDark] = useState(false)
   const [certIndex, setCertIndex] = useState(null)
@@ -136,6 +138,7 @@ function App() {
 
   return (
     <div className={dark ? 'app dark' : 'app'}>
+      {isLoading && <LoadingScreen onFinish={() => setIsLoading(false)} />}
       <header className="nav">
         <a href="#home" className="brand">Sayan<span>.</span></a>
         <nav className={menuOpen ? 'navlinks open' : 'navlinks'}>
@@ -155,7 +158,7 @@ function App() {
       <main>
         <section id="home" className="hero section-pad">
           <div className="hero-copy">
-            <div className="scribble">Hi, I'm ✦</div>
+            <div className="scribble">Hi, I'm</div>
             <h1>SAYAN<br/><span>BARMAN</span></h1>
             <p className="role">Computer Science Engineer • AI/ML • Robotics • Creative Technologist</p>
             <p className="lead">Building intelligent systems, robots, digital experiences, and creative technology.</p>
